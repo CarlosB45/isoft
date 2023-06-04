@@ -1,0 +1,3 @@
+instale nuevas dependencias 
+nuevas carpetas
+descargue microsoft sql (activar el tcp/ip en el sql server)
