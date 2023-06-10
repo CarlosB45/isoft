@@ -1,3 +1,4 @@
 instale nuevas dependencias 
 nuevas carpetas
-descargue microsoft sql (activar el tcp/ip en el sql server)
+descargue mongodb y su extension en vscode tambien
+tambien thunder client para realizar posts
