@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {useForm} from 'react-hook-form'
+
+import Loginpage from './Pages/home/Loginpage'
+import Register from './Pages/home/Register'
+import Homeadministrador from './Pages/administrador/home'
+import Homedoctor from './Pages/doctor/home'
+import Homepaciente from './Pages/paciente/home'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element ={<Loginpage/>} />
+      <Route path='/Login' element ={<Loginpage/>} />
+      <Route path='/Register' element ={<Register/>} />
+      <Route path='/Homeadministrador' element ={<Homeadministrador/>} />
+      <Route path='/Homedoctor' element ={<Homedoctor/>} />
+      <Route path='/Homepaciente' element ={<Homepaciente/>} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 
