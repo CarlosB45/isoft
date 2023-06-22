@@ -1,7 +1,7 @@
-import css from '../../css/style.css'
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, img } from 'react-router-dom';
+import css from '../../css/style.css'
 
 function Loginpage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -13,9 +13,8 @@ function Loginpage() {
   return (
     <div className='background-element'>
       <div className="register-container">
-      <body>
-        <div className='corner-image'></div>
-      </body>
+      <div className='corner-image'>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label htmlFor="email">Email</label>

@@ -21,7 +21,7 @@ const Home = () => {
           </header>
           <div className="options">
             <Link to="/opcion1">Administrador de usuarios</Link>
-            <Link to="/opcion2">Dar soporte</Link>
+            <Link to="/opcion2">Dar soporte </Link>
           </div>
           <div className="content">
             <h1>Página de Inicio</h1>

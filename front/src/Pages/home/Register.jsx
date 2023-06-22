@@ -11,9 +11,8 @@ function Register() {
 
   return (
     <div className="register-container">
-      <body>
-        <div className='corner-image'></div>
-      </body>
+      <div className='corner-image'>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label htmlFor="fullname">Nombre completo</label>

@@ -86,7 +86,6 @@
     width: 600px;
     height: 500px;
     background-image: url('../imagen/logo.png');
-    background-repeat: no-repeat;
     background-size: 700px;
   }
   .toolbar {
