@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 
 import config from "./config.js";
 import authRoutes from "./routes/auth.routes.js";
-import citaMedica from "./routes/citamedica.routes.js"
+import citaMedicaDoctor from "./routes/doctor/citamedica.routes.js"
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(authRoutes);
-app.use(citaMedica);
+app.use(citaMedicaDoctor);
 
 //settings
 app.set("port", config.port);

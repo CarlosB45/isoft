@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
   tipo_usuario: {
     type: String,
     required: true,
+    enum: [
+      'doctor',
+      'paciente',
+      'administrador'
+    ]
   },
   
 }, {
