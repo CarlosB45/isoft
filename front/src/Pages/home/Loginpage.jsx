@@ -11,7 +11,8 @@ function Loginpage() {
   };
 
   return (
-    <div className="register-container">
+    <div className='background-element'>
+      <div className="register-container">
       <body>
         <div className='corner-image'></div>
       </body>
@@ -32,13 +33,15 @@ function Loginpage() {
         </div>
         <div className="form-group terms-and-conditions">
           <h1>¿No tienes una cuenta?</h1>
-          <Link to="/Register">Regístrate aquí</Link> {/* Utilizar el componente Link para el enlace */}
+          <Link to="/register">Regístrate aquí</Link> {/* Utilizar el componente Link para el enlace */}
         </div>
         <div className="container">
           <button type="submit">Iniciar sesión</button>
         </div>
       </form>
     </div>
+    </div>
+    
   );
 }
 

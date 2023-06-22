@@ -36,7 +36,6 @@ function Register() {
             <option value="">Seleccionar rol</option>
             <option value="doctor">Doctor</option>
             <option value="paciente">Paciente</option>
-            <option value="administrador">Administrador</option>
           </select>
           {errors.role && <span className="error-message">Seleccione un rol</span>}
         </div>
