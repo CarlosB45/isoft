@@ -8,8 +8,8 @@ export const authRequired = (req, res, next) => {
 
   jwt.verify(token, TOKEN_SECRET, (err, usuario) => {
     if (err) return res.status(403).json({ message: "Token invalido" });
-
-    req.usuario = usuario
+    req.usuario = usuario;
+    res.cookie("token", token);
   });
   next();
 };

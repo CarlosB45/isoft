@@ -13,7 +13,10 @@ export const register = async (req, res) => {
       tipo_usuario,
     });
     const usuarioSaved = await newUsuario.save();
-    const token = await createAccessToken({ id: usuarioSaved._id });
+    const token = await createAccessToken({
+      id: usuarioSaved._id,
+      tipo_usuario: usuarioSaved.tipo_usuario,
+    });
 
     res.cookie("token", token);
     res.json({
@@ -40,7 +43,10 @@ export const login = async (req, res) => {
     if (!match)
       return res.status(400).json({ message: "Contraseña incorrecta" });
 
-    const token = await createAccessToken({ id: usuarioFound._id });
+    const token = await createAccessToken({
+      id: usuarioFound._id,
+      tipo_usuario: usuarioFound.tipo_usuario,
+    });
 
     res.cookie("token", token);
     res.json({
@@ -75,5 +81,4 @@ export const profile = async (req, res) => {
     createdAt: usuarioFound.createdAt,
     updatedAt: usuarioFound.updatedAt,
   });
-
 };
