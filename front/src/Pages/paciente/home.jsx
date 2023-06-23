@@ -20,8 +20,8 @@ const Home = () => {
             </div>
           </header>
           <div className="options">
-            <Link to="/opcion1">Gestionar cita</Link>
-            <Link to="/opcion2">Consultar historial clinico</Link>
+            <Link to="/Homepaciente/Gestionarcita">Gestionar cita</Link>
+            <Link to="/Homepaciente/Consultarhistorialclinico">Consultar historial clinico</Link>
           </div>
           <div className="content">
             <h1>Página de Inicio</h1>
