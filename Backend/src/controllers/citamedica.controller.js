@@ -1,32 +1,80 @@
 import citaMedica from "../models/citamedica.model.js";
+import Usuario from "../models/user.model.js";
 
-export const getCitasMedica = async (req, res) => {
-  const citasmedica = await citaMedica.find({
-    usuario: req.usuario.id
-  }).populate('usuario')
+export const getCitasMedicaDoctor = async (req, res) => {
+  const citasmedica = await citaMedica
+    .find({
+      doctor: req.usuario.id,
+    })
+    .populate({
+      path: "paciente",
+      select: "usuario",
+    })
+    .populate({
+      path: "doctor",
+      select: "usuario",
+    });
+    
+  res.json(citasmedica);
+};
+
+export const getCitasMedicaPaciente = async (req, res) => {
+  const citasmedica = await citaMedica
+    .find({
+      paciente: req.usuario.id,
+    })
+    .populate({
+      path: "paciente",
+      select: "usuario",
+    })
+    .populate({
+      path: "doctor",
+      select: "usuario",
+    });
+    
   res.json(citasmedica);
 };
 
 export const getCitaMedica = async (req, res) => {
-  const citamedica = await citaMedica.findById(req.params.id).populate('usuario');
+  const citamedica = await citaMedica
+    .findById(req.params.id)
+    .populate({
+      path: "paciente",
+      select: "usuario",
+    })
+    .populate({
+      path: "doctor",
+      select: "usuario",
+    });
   if (!citamedica)
     return res.Status(400).json({ message: "Cita medica no encontrada" });
   res.json(citamedica);
 };
 
 export const createCitaMedica = async (req, res) => {
-  const { cedulaPaciente, date, motivo, doctor } = req.body;
+  const { date, motivo, nombreDoctor } = req.body;
+  console.log(req.body);
 
-  console.log(req.usuario)
-  const newcitaMedica = new citaMedica({
-    cedulaPaciente,
-    date,
-    motivo,
-    doctor,
-    usuario: req.usuario.id,
-  });
-  const savedcitaMedica = await newcitaMedica.save();
-  res.json(savedcitaMedica);
+  try {
+    const doctor = await Usuario.findOne({ usuario: nombreDoctor });
+    if (!doctor) {
+      return res
+        .status(404)
+        .json({ message: "No se encontró al doctor especificado" });
+    }
+    console.log(doctor.id);
+    console.log(req.usuario.id);
+    const newcitaMedica = new citaMedica({
+      date,
+      motivo,
+      doctor: doctor.id,
+      paciente: req.usuario.id,
+    });
+    const savedcitaMedica = await newcitaMedica.save();
+    res.json(savedcitaMedica);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const deleteCitaMedica = async (req, res) => {

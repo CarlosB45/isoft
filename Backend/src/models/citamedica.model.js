@@ -1,28 +1,25 @@
 import mongoose from "mongoose";
+import { number } from "zod";
 
-const citaMedicaSchema = new mongoose.Schema(
-  {
-    cedulaPaciente: {
-      type: Number,
-    },
-    date: {
-      type: Date,
-    },
-    motivo: {
-      type: String,
-    },
-    doctor: {
-      type: String,
-    },
-    usuario:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    }
+const citaMedicaSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    
   },
-  {
-    timestamps: true,
-  }
-);
+  motivo: {
+    type: String,
+    required: true,
+  },
+  doctor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
+  },
+  paciente: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
+  },
+});
 
 export default mongoose.model("citaMedica", citaMedicaSchema);
