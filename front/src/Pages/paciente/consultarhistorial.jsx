@@ -5,6 +5,20 @@ import '../../css/homestyle.css';
 
 const Consultarhistorial = () => {
   const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const [consulta, setConsulta] = useState('');
+  const [resultados, setResultados] = useState([]);
+
+  // Función para realizar la búsqueda de consultas
+  const buscarConsultas = () => {
+    // Aquí puedes implementar la lógica para buscar las consultas en la base de datos
+    // utilizando el valor de consulta y actualizar los resultados en el estado resultados
+    const resultadosObtenidos = [
+      { doctor: 'Dr. Juan Pérez', fecha: '2023-06-24', historial: 'Consulta general' },
+      { doctor: 'Dra. Ana López', fecha: '2023-06-25', historial: 'Examen de rutina' },
+      // ... más resultados obtenidos
+    ];
+    setResultados(resultadosObtenidos);
+  };
 
   return (
     <body>
@@ -19,22 +33,46 @@ const Consultarhistorial = () => {
             </Link>
           </div>
         </header>
-        <div className="information-block">
-            <p>Consultar Historial clinico</p>
-              <div className="sidebar">
-              <div className="options2">
-            <Link to="/Homepaciente"><AiOutlineHome className="icon" />Inicio</Link>
-             </div>
-              </div>
-            </div>
-        <div className="main-content">
-          <div className="content2">
-          <h1>Página del administrador</h1>
-          </div>
+        <div className="dashboard-container">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li className="menu-item">
+          <Link to="/Homepaciente"><AiOutlineHome className="menu-icon" />
+            <span className="menu-text">Inicio</span>
+          </Link>
+          </li>
+        </ul>
+      </aside>
+      <main className="content2">
+      <div className="form-container">
+        <h2>Barra de Búsqueda</h2>
+        <div className="input-container">
+          <label htmlFor="consultaInput">Consulta:</label>
+          <input
+            type="text"
+            id="consultaInput"
+            value={consulta}
+            onChange={(e) => setConsulta(e.target.value)}
+          />
         </div>
-        <footer className="footer2">
-          <p>© 2023 Honda. Todos los derechos reservados.</p>
-        </footer>
+        <button type="button" onClick={buscarConsultas}>
+          Buscar
+        </button>
+        {resultados.length > 0 && (
+          <div>
+            <h3>Resultados:</h3>
+            <ul>
+              {resultados.map((resultado, index) => (
+                <li key={index}>
+                  Doctor: {resultado.doctor},Fecha:{resultado.fecha}, Historial: {resultado.historial}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </main>
+        </div>
       </div>
     </body>
   );

@@ -5,6 +5,17 @@ import '../../../css/homestyle.css';
 
 const Cancelar = () => {
   const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const [citas, setCitas] = useState([
+    { paciente: 'John Doe', fecha: '2023-06-24', motivo: 'Consulta general' },
+    { paciente: 'Jane Smith', fecha: '2023-06-25', motivo: 'Examen de rutina' },
+    // Agrega más citas aquí
+  ]);
+
+  const handleCancelarCita = (index) => {
+    const citasActualizadas = [...citas];
+    citasActualizadas.splice(index, 1);
+    setCitas(citasActualizadas);
+  };
 
   return (
     <body>
@@ -19,24 +30,50 @@ const Cancelar = () => {
             </Link>
           </div>
         </header>
-        <div className="information-block">
-            <p>Cancelar cita</p>
-              <div className="sidebar">
-              <div className="options2">
-            <Link to="/Homedoctor"><AiOutlineHome className="icon" />Inicio</Link>
-            <Link to="/Homedoctor/Gestionar/Cancelarcita"> <AiOutlineDelete className="icon" />Cancelar cita</Link>
-            <Link to="/Homedoctor/Gestionar/Modificarcita"> <AiOutlineEdit className="icon" />Modificar cita</Link>
-             </div>
-              </div>
-            </div>
-        <div className="main-content">
-          <div className="content2">
-          <h1>Página del administrador</h1>
-          </div>
+        <div className="dashboard-container">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li className="menu-item">
+          <Link to="/Homedoctor"><AiOutlineHome className="menu-icon" />
+            <span className="menu-text">Inicio</span>
+          </Link>
+          </li>
+          <li className="menu-item">
+          <Link to="/Homedoctor/Gestionar/Modificarcita"><AiOutlineEdit className="menu-icon" />
+            <span className="menu-text">Modificar cita</span></Link>
+          </li>
+          <li className="menu-item active">
+          <Link to="/Homedoctor/Gestionar/Cancelarcita"><AiOutlineDelete className="menu-icon" />
+            <span className="menu-text">Cancelar cita</span></Link>
+          </li>
+        </ul>
+      </aside>
+      <main className="content2">
+      <h2>Citas Médicas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre del Paciente</th>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {citas.map((cita, index) => (
+            <tr key={index}>
+              <td>{cita.paciente}</td>
+              <td>{cita.fecha}</td>
+              <td>{cita.motivo}</td>
+              <td>
+                <button onClick={() => handleCancelarCita(index)}>Cancelar</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
         </div>
-        <footer className="footer2">
-          <p>© 2023 Honda. Todos los derechos reservados.</p>
-        </footer>
       </div>
     </body>
   );

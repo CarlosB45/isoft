@@ -5,6 +5,18 @@ import '../../css/homestyle.css';
 
 const Eliminar = () => {
   const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const [deleteUserName, setDeleteUserName] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleInputChange = (event) => {
+    setDeleteUserName(event.target.value);
+  };
+
+  const handleDelete = () => {
+    // Aquí puedes realizar la lógica para eliminar el usuario
+    // Puedes mostrar el mensaje de éxito estableciendo `showMessage` en `true`
+    setShowMessage(true);
+  };
 
   return (
     <body>
@@ -19,24 +31,38 @@ const Eliminar = () => {
             </Link>
           </div>
         </header>
-        <div className="information-block">
-            <p>Eliminar usuarios</p>
-              <div className="sidebar">
-              <div className="options2">
-            <Link to="/Homeadministrador"><AiOutlineHome className="icon" />Inicio</Link>
-            <Link to="/Homeadministrador/Administradorusuario/Eliminarusuario">  <AiOutlineDelete className="icon" />Eliminar usuarios</Link>
-            <Link to="/Homeadministrador/Administradorusuario/Listarusuario"> <AiOutlineEye className="icon" />Listar usuarios</Link>
-             </div>
-              </div>
-            </div>
-        <div className="main-content">
-          <div className="content2">
-          <h1>Página del administrador</h1>
-          </div>
+        <div className="dashboard-container">
+      <aside className="sidebar">
+        <ul className="menu">
+          <li className="menu-item">
+          <Link to="/Homeadministrador"><AiOutlineHome className="menu-icon" />
+            <span className="menu-text">Inicio</span>
+          </Link>
+          </li>
+          <li className="menu-item active">
+          <Link to="/Homeadministrador/Administradorusuario/Eliminarusuario"><AiOutlineDelete className="menu-icon" />
+            <span className="menu-text">Eliminar usuario</span>
+          </Link>
+          </li>
+          <li className="menu-item">
+          <Link to="/Homeadministrador/Administradorusuario/Listarusuario"><AiOutlineEye className="menu-icon" />
+            <span className="menu-text">Listar usuario</span></Link>
+          </li>
+        </ul>
+      </aside>
+      <main className="content2">
+      <div className="form-container">
+        <h2>Eliminar usuario</h2>
+        <div className="input-container">
+          <label htmlFor="inputField">Nombre del usuario:</label>
+          <input type="text" id="inputField" value={deleteUserName} onChange={handleInputChange} />
         </div>
-        <footer className="footer2">
-          <p>© 2023 Honda. Todos los derechos reservados.</p>
-        </footer>
+        <button type="button" onClick={handleDelete}>Eliminar</button>
+        {showMessage && <p>El usuario se eliminó correctamente.</p>}
+      </div>
+    </main>
+
+    </div>
       </div>
     </body>
   );
