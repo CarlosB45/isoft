@@ -2,3 +2,7 @@ instale nuevas dependencias
 nuevas carpetas
 descargue mongodb y su extension en vscode tambien
 tambien thunder client para realizar posts
+
+
+NO PERMITIR CAMBIAR AL DOCTOR EN EL MOMENTO DE ACTUALIZAR UNA CITA MEDICA
+el nombre de los doctores los obtiene en una ruta nueva

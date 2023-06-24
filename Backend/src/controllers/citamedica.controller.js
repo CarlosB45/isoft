@@ -62,8 +62,6 @@ export const createCitaMedica = async (req, res) => {
         .status(404)
         .json({ message: "No se encontró al doctor especificado" });
     }
-    console.log(doctor.id);
-    console.log(req.usuario.id);
     const newcitaMedica = new citaMedica({
       date,
       motivo,
