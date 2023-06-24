@@ -47,10 +47,9 @@ function App() {
       <Route path='/Homedoctor/Consultar' element ={<Consultar/>} />
       <Route path='/Homedoctor/Actualizarhistorial' element ={<Actualizarhistorial/>} />
       <Route path='/Homedoctor/Crearhistorial' element ={<Crearhistorial/>} />
-
       <Route path='/Homepaciente' element ={<Homepaciente/>} />
       <Route path='/Homepaciente/Gestionarcita' element ={<Gestionarcita/>} />
-      <Route path='/Homedoctor/Gestionarcita/Crear' element ={<Crear/>} />
+      <Route path='/Homepaciente/Gestionarcita/Crear' element ={<Crear/>} />
       <Route path='/Homepaciente/Gestionarcita/Cancelar' element ={<Cancelar/>} />
       <Route path='/Homepaciente/Gestionarcita/Modificar' element ={<Modificar/>} />
       <Route path='/Homepaciente/Consultarhistorialclinico' element ={<Consultarhistorial/>} />
