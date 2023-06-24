@@ -1,6 +1,22 @@
 import citaMedica from "../models/citamedica.model.js";
 import Usuario from "../models/user.model.js";
 
+export const nombrePacientes= async (req, res) => {
+  const citasmedica = await citaMedica
+    .find({
+      doctor: req.usuario.id,
+    })
+    .populate({
+      path: "paciente",
+      select: "usuario",
+    })
+    .select("-_id")
+
+  const pacientes = citasmedica.map(cita => cita.paciente);
+
+  res.json(pacientes);
+};
+
 export const getCitasMedicaDoctor = async (req, res) => {
   const citasmedica = await citaMedica
     .find({

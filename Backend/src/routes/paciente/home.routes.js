@@ -6,7 +6,7 @@ import { nombresDoctores } from "../../middlewares/nombreDoctores.middleware.js"
 
 const router = Router();
 
-router.get("/Homepaciente", authRequired, roleRequired("paciente"), profile, nombresDoctores);
-router.get("/Homepaciente/nombredoctores", authRequired, roleRequired("paciente"), nombresDoctores);
+router.get("/Homepaciente", authRequired, roleRequired("paciente"), profile);
+router.get("/Homepaciente/nombredoctores", authRequired,roleRequired("paciente"), nombresDoctores);
 
 export default router;
