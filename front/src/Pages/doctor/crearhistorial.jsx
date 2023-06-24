@@ -56,7 +56,7 @@ const Crearhistorial = () => {
       </aside>
       <main className="content2">
       <div className="form-container">
-        <h2>Crear Cita Médica</h2>
+        <h2>Crear Historial Medico</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-container">
             <label htmlFor="doctorField">Nombre del doctor:</label>
@@ -87,7 +87,7 @@ const Crearhistorial = () => {
               placeholder="Ingrese el historial"
             />
           </div>
-          <button type="submit">Crear Cita</button>
+          <button type="submit">Crear Historial</button>
         </form>
       </div>
     </main>
