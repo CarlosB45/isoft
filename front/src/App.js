@@ -1,8 +1,10 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-
+import { AuthProvider } from './context/AuthContext'
 
 import Loginpage from './Pages/home/Loginpage'
 import Register from './Pages/home/Register'
+import Homepage from './Pages/home/homepage'
+import ProtectedRoutes from './ProtectedRoutes'
 
 /*Rutas para el administrador*/
 import Homeadministrador from './Pages/administrador/home'
@@ -31,11 +33,13 @@ import Cancelar from './Pages/paciente/cancelar'
 
 function App() {
   return (
-    <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
     <Routes>
-      <Route path='/' element ={<Loginpage/>} />
+      <Route path='/' element ={<Homepage/>} />
       <Route path='/Login' element ={<Loginpage/>} />
       <Route path='/Register' element ={<Register/>} />
+      <Route element={<ProtectedRoutes/>} >
       <Route path='/Homeadministrador' element ={<Homeadministrador/>} />
       <Route path='/Homeadministrador/Administradorusuario' element ={<Administradorusuario/>} />
       <Route path='/Homeadministrador/Administradorusuario/Eliminarusuario' element ={<Eliminarusuario/>} />
@@ -53,9 +57,11 @@ function App() {
       <Route path='/Homepaciente/Gestionarcita/Cancelar' element ={<Cancelar/>} />
       <Route path='/Homepaciente/Gestionarcita/Modificar' element ={<Modificar/>} />
       <Route path='/Homepaciente/Consultarhistorialclinico' element ={<Consultarhistorial/>} />
-
+      </Route>
     </Routes>
     </BrowserRouter>
+      </AuthProvider>
+
   );
 }
 

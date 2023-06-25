@@ -1,5 +1,5 @@
 
-import {  z } from "zod";
+import { z } from "zod";
 export const registerValidator = z.object({
   usuario: z.string({
     required_error: "Usuario es requerido",
