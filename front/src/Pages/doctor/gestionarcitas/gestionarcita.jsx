@@ -16,7 +16,7 @@ const Gestionarcita = () => {
       <div className="homepage-container">
         <header className="toolbar">
           <div className="logo">
-            HONDA <span className="welcome-message">Bienvenido {userName}</span>
+            HONDA 
           </div>
           <div className="user-info">
             <Link to="/login">

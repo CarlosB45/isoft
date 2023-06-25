@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/homestyle.css';
-
+import {useAuth} from '../../context/AuthContext';
 const Home = () => {
-  const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const {isAuthenticated,user} = useAuth();
 
   return (
     <body>
@@ -11,12 +11,10 @@ const Home = () => {
         <div className="homepage-container">
           <header className="toolbar">
             <div className="logo">
-              HONDA <span className="welcome-message">Bienvenido {userName}</span>
+              HONDA <span className="welcome-message">Bienvenido {user.usuario}</span>
             </div>
             <div className="user-info">
-              <Link to="/login">
-                <button>Cerrar sesión</button>
-              </Link>
+              <Link to="/Login"><button>Cerrar sesión</button></Link>
             </div>
           </header>
           <div className="options">

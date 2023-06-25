@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     }
 
   }
+  
 
   useEffect(() => {
     if(erros.length > 0){
