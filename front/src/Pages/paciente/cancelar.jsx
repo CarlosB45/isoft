@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEdit,AiOutlinePlusCircle} from 'react-icons/ai';
 import '../../css/homestyle.css';
+import { useAuth } from '../../context/AuthContext';
 
 const Cancelar = () => {
-  const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const {logout,user} = useAuth();
   const [citas, setCitas] = useState([
     { doctor: 'Dr. Juan Pérez', fecha: '2023-06-25', motivo: 'Consulta general' },
     { doctor: 'Dr. María Gómez', fecha: '2023-06-26', motivo: 'Control de medicación' },
@@ -26,7 +27,7 @@ const Cancelar = () => {
             HONDA 
           </div>
           <div className="user-info">
-            <Link to="/login">
+            <Link to="/login"onClick={()=>{logout();}}>
               <button>Cerrar sesión</button>
             </Link>
           </div>

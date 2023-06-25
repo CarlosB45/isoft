@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../css/homestyle.css';
 import {useAuth} from '../../context/AuthContext';
 const Home = () => {
-  const {isAuthenticated,user} = useAuth();
+  const {isAuthenticated,user, logout} = useAuth();
 
   return (
     <body>
@@ -14,7 +14,7 @@ const Home = () => {
               HONDA <span className="welcome-message">Bienvenido {user.usuario}</span>
             </div>
             <div className="user-info">
-              <Link to="/Login"><button>Cerrar sesión</button></Link>
+              <Link to="/Login" onClick={()=>{logout();}}><button>Cerrar sesión</button></Link>
             </div>
           </header>
           <div className="options">

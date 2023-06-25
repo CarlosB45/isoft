@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEye} from 'react-icons/ai';
 import '../../css/homestyle.css';
+import {useAuth} from '../../context/AuthContext';
 
 const Listar = () => {
-  const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const {logout,user} = useAuth();
 
   return (
     <body>
@@ -14,7 +15,7 @@ const Listar = () => {
             HONDA 
           </div>
           <div className="user-info">
-            <Link to="/login">
+            <Link to="/login"onClick={()=>{logout();}} >
               <button>Cerrar sesión</button>
             </Link>
           </div>
@@ -39,31 +40,26 @@ const Listar = () => {
         </ul>
       </aside>
       <main className="content2">
-  <h1>Usuarios del sistema</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Correo electrónico</th>
-        <th>Rol</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Usuario 1</td>
-        <td>usuario1@example.com</td>
-        <td>Administrador</td>
-      </tr>
-      <tr>
-        <td>Usuario 2</td>
-        <td>usuario2@example.com</td>
-        <td>Usuario regular</td>
-      </tr>
-      {/* Agrega más filas para mostrar otros usuarios */}
-    </tbody>
-  </table>
-</main>
-
+            <h1>Usuarios del sistema</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo electrónico</th>
+                  <th>Rol</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.map((userData, index) => (
+                  <tr key={index}>
+                    <td>{userData.usuario}</td>
+                    <td>{userData.email}</td>
+                    <td>{userData.tipo_usuario}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </main>
     </div>
       </div>
     </body>

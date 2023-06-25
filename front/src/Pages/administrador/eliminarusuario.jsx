@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEye} from 'react-icons/ai';
 import '../../css/homestyle.css';
-
+import {useAuth} from '../../context/AuthContext';
 const Eliminar = () => {
-  const [userName] = useState('NombreUsuario'); // Reemplaza 'NombreUsuario' con el nombre real del usuario registrado
+  const {logout} = useAuth();
   const [deleteUserName, setDeleteUserName] = useState('');
   const [showMessage, setShowMessage] = useState(false);
 
@@ -26,7 +26,7 @@ const Eliminar = () => {
             HONDA 
           </div>
           <div className="user-info">
-            <Link to="/login">
+            <Link to="/login" onClick={()=>{logout();}}>
               <button>Cerrar sesión</button>
             </Link>
           </div>
