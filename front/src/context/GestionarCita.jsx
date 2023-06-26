@@ -40,18 +40,19 @@ export function GestionarCitaProvider({ children }) {
   const getCita = async (id) => {
     try {
       const res = await getcitaRequest(id);
+      return res.data;
     } catch (error) {
       setErrors([error.message]);
     }
   };
 
-  const updatecita = async (id,cita) =>{
+  const updatecita = async (id, cita) => {
     try {
-      const res = await UpdatecitaRequest(id,cita);
+      const res = await UpdatecitaRequest(id, cita);
+      console.log(res);
     } catch (error) {
       setErrors([error.message]);
     }
-
   };
 
   const deletecita = async (id) =>{
@@ -81,7 +82,7 @@ export function GestionarCitaProvider({ children }) {
         updatecita,
         deletecita,
         errors,
-        citas
+        citas,
       }}
     >
       {children}

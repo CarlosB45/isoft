@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlinePlusCircle, AiOutlineEdit } from 'react-icons/ai';
 import '../../css/homestyle.css';
 import { useAuth } from '../../context/AuthContext';
@@ -103,7 +103,7 @@ const Crear = () => {
                   onChange={(event) => setMotivo(event.target.value)}
                 />
               </div>
-              <button type="submit">Crear Cita</button>
+              <button type="submit">Guardar Cita</button>
             </form>
           </div>
         </main>

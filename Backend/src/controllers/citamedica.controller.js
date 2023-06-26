@@ -83,6 +83,10 @@ export const createCitaMedica = async (req, res) => {
         .status(404)
         .json({ message: "No se encontró al doctor especificado" });
     }
+  const existeCitaMedica = await citaMedica.findOne({ date });
+  if (existeCitaMedica) {
+    return res.status(400).json({ message: "Ya existe una cita médica con esa fecha" });
+  }
     const newcitaMedica = new citaMedica({
     date: date.toString(), // Convierte el objeto Date a una cadena de texto
     motivo,
@@ -104,14 +108,22 @@ export const deleteCitaMedica = async (req, res) => {
 };
 
 export const updateCitaMedica = async (req, res) => {
-  const citamedica = await citaMedica.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
+  try {
+    const citamedica = await citaMedica.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!citamedica) {
+      return res.status(404).json({ message: "Cita medica no encontrada" });
     }
-  );
-  if (!citamedica)
-    return res.sendStatus(404).json({ message: "Cita medica no encontrada" });
-  res.json(citamedica);
+
+    res.json(citamedica);
+  } catch (error) {
+    console.error("Error al actualizar la cita medica:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 };
