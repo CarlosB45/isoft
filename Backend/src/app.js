@@ -30,8 +30,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api",authRoutes);
-app.use(citaMedicaDoctor);
-app.use(citaMedicaPaciente);
+app.use("/api",citaMedicaDoctor);
+app.use("/api",citaMedicaPaciente);
 app.use(Homedoctor);
 app.use(Homepaciente);
 app.use(nombredoctores);
@@ -39,7 +39,7 @@ app.use(Homeadministrador);
 app.use(nombrepacientes);
 app.use(historialMedicoDoctor);
 app.use(historialMedicoPaciente);
-app.use(gestionarUsuarios);
+app.use("/api",gestionarUsuarios);
 
 //settings
 app.set("port", config.port);

@@ -29,11 +29,17 @@ import Gestionarcita from './Pages/paciente/gestionarcita'
 import Crear from './Pages/paciente/crear'
 import Modificar from './Pages/paciente/modificar'
 import Cancelar from './Pages/paciente/cancelar'
+import { GestionarProvider } from './context/Gestionaruser'
+import { GestionarCitaProvider } from './context/GestionarCita'
+import { HistorialmedicProvider } from './context/Historialmedic'
 
 
 function App() {
   return (
       <AuthProvider>
+        <GestionarProvider>
+        <GestionarCitaProvider>
+
         <BrowserRouter>
     <Routes>
       <Route path='/' element ={<Homepage/>} />
@@ -60,6 +66,9 @@ function App() {
       </Route>
     </Routes>
     </BrowserRouter>
+
+        </GestionarCitaProvider>
+        </GestionarProvider>
       </AuthProvider>
 
   );

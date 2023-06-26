@@ -304,4 +304,14 @@
     align-self: center;
   }
   
+  .error-container {
+    background-color: red;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    margin-bottom: 5px;
+  }
 

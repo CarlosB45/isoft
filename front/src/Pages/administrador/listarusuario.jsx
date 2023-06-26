@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEye} from 'react-icons/ai';
 import '../../css/homestyle.css';
 import {useAuth} from '../../context/AuthContext';
+import { useGestionar } from '../../context/Gestionaruser';
+import { useEffect } from 'react';
 
 const Listar = () => {
-  const {logout,user} = useAuth();
+  const {logout} = useAuth();
+  const{getUsers,users} =useGestionar();
+
+  useEffect(()=>{
+    getUsers()
+  },[])
 
   return (
     <body>
@@ -40,26 +47,27 @@ const Listar = () => {
         </ul>
       </aside>
       <main className="content2">
-            <h1>Usuarios del sistema</h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Correo electrónico</th>
-                  <th>Rol</th>
-                </tr>
-              </thead>
-              <tbody>
-                {user.map((userData, index) => (
-                  <tr key={index}>
-                    <td>{userData.usuario}</td>
-                    <td>{userData.email}</td>
-                    <td>{userData.tipo_usuario}</td>
-                  </tr>
+  <h1>Usuarios del sistema</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo electrónico</th>
+        <th>Rol</th>
+      </tr>
+    </thead>
+    <tbody>
+    {users.map((usuario) => (
+  <tr key={usuario.id}>
+    <td>{usuario.usuario}</td>
+    <td>{usuario.email}</td>
+    <td>{usuario.tipo_usuario}</td>
+  </tr>
                 ))}
               </tbody>
-            </table>
-          </main>
+  </table>
+</main>
+
     </div>
       </div>
     </body>

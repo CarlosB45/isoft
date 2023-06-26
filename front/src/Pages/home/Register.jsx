@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const {signup,user, isAuthenticated, erros: registerErrors} = useAuth();
+  const {signup , user, isAuthenticated, erros: registerErrors} = useAuth();
 
   const navigate = useNavigate();
 

@@ -13,11 +13,11 @@ export const getUsuario = async (req, res) => {
         res.json(usuario);
       };
 
-export const deleteUsuario = async (req, res) => {
-  const usuario = await Usuario.findByIdAndDelete(req.params.id);
-  if (!usuario)
-    return res.status(404).json({ message: "Usuario no encontrado" });
-  res.sendStatus(204);
-};
+      export const deleteUsuario = async (req, res) => {
+        const usuario = await Usuario.findByIdAndDelete(req.params.id);
+        if (!usuario)
+          return res.status(404).json({ message: "Usuario no encontrado" });
+        res.status(200).json({});
+      };
 
 

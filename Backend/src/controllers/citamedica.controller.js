@@ -46,10 +46,15 @@ export const getCitasMedicaPaciente = async (req, res) => {
     .populate({
       path: "doctor",
       select: "usuario",
+    })
+    .populate({
+      path: "doctor",
+      select: "usuario",
     });
-    
+
   res.json(citasmedica);
 };
+
 
 export const getCitaMedica = async (req, res) => {
   const citamedica = await citaMedica
@@ -68,7 +73,7 @@ export const getCitaMedica = async (req, res) => {
 };
 
 export const createCitaMedica = async (req, res) => {
-  const { date, motivo, nombreDoctor } = req.body;
+  const { date , motivo, nombreDoctor } = req.body;
   console.log(req.body);
 
   try {
@@ -79,10 +84,10 @@ export const createCitaMedica = async (req, res) => {
         .json({ message: "No se encontró al doctor especificado" });
     }
     const newcitaMedica = new citaMedica({
-      date,
-      motivo,
-      doctor: doctor.id,
-      paciente: req.usuario.id,
+    date: date.toString(), // Convierte el objeto Date a una cadena de texto
+    motivo,
+    doctor: doctor.id,
+    paciente: req.usuario.id,
     });
     const savedcitaMedica = await newcitaMedica.save();
     res.json(savedcitaMedica);
