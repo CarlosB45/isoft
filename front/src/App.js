@@ -32,6 +32,7 @@ import Cancelar from './Pages/paciente/cancelar'
 import { GestionarProvider } from './context/Gestionaruser'
 import { GestionarCitaProvider } from './context/GestionarCita'
 import { HistorialmedicProvider } from './context/Historialmedic'
+import { GestionarcitadocProvider } from './context/Gestionarcitadoc'
 
 
 function App() {
@@ -39,8 +40,8 @@ function App() {
       <AuthProvider>
         <GestionarProvider>
         <GestionarCitaProvider>
-
-        <BrowserRouter>
+          <GestionarcitadocProvider>
+          <BrowserRouter>
     <Routes>
       <Route path='/' element ={<Homepage/>} />
       <Route path='/Login' element ={<Loginpage/>} />
@@ -66,7 +67,7 @@ function App() {
       </Route>
     </Routes>
     </BrowserRouter>
-
+          </GestionarcitadocProvider>
         </GestionarCitaProvider>
         </GestionarProvider>
       </AuthProvider>

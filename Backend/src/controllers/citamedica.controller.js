@@ -18,21 +18,27 @@ export const nombrePacientes= async (req, res) => {
 };
 
 export const getCitasMedicaDoctor = async (req, res) => {
-  const citasmedica = await citaMedica
-    .find({
-      doctor: req.usuario.id,
-    })
-    .populate({
-      path: "paciente",
-      select: "usuario",
-    })
-    .populate({
-      path: "doctor",
-      select: "usuario",
-    });
-    
-  res.json(citasmedica);
+  try {
+    const citasmedica = await citaMedica
+      .find({
+        doctor: req.usuario.id,
+      })
+      .populate({
+        path: "paciente",
+        select: "usuario",
+      })
+      .populate({
+        path: "doctor",
+        select: "usuario",
+      });
+      
+    res.json(citasmedica);
+  } catch (error) {
+    console.error("Error al obtener las citas médicas del doctor:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 };
+
 
 export const getCitasMedicaPaciente = async (req, res) => {
   const citasmedica = await citaMedica
@@ -47,29 +53,33 @@ export const getCitasMedicaPaciente = async (req, res) => {
       path: "doctor",
       select: "usuario",
     })
-    .populate({
-      path: "doctor",
-      select: "usuario",
-    });
 
   res.json(citasmedica);
 };
 
 
 export const getCitaMedica = async (req, res) => {
-  const citamedica = await citaMedica
-    .findById(req.params.id)
-    .populate({
-      path: "paciente",
-      select: "usuario",
-    })
-    .populate({
-      path: "doctor",
-      select: "usuario",
-    });
-  if (!citamedica)
-    return res.Status(400).json({ message: "Cita medica no encontrada" });
-  res.json(citamedica);
+  try {
+    const citamedica = await citaMedica
+      .findById(req.params.id)
+      .populate({
+        path: "paciente",
+        select: "usuario",
+      })
+      .populate({
+        path: "doctor",
+        select: "usuario",
+      });
+
+    if (!citamedica) {
+      return res.status(400).json({ message: "Cita médica no encontrada" });
+    }
+
+    res.json(citamedica);
+  } catch (error) {
+    console.error("Error al obtener la cita médica:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 };
 
 export const createCitaMedica = async (req, res) => {

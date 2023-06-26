@@ -37,8 +37,8 @@ app.use(Homepaciente);
 app.use(nombredoctores);
 app.use(Homeadministrador);
 app.use(nombrepacientes);
-app.use(historialMedicoDoctor);
-app.use(historialMedicoPaciente);
+app.use("/api",historialMedicoDoctor);
+app.use("/api",historialMedicoPaciente);
 app.use("/api",gestionarUsuarios);
 
 //settings

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEdit} from 'react-icons/ai';
 import '../../../css/homestyle.css';
 import { useAuth } from '../../../context/AuthContext';
+import { useGestionarcitadoc } from '../../../context/Gestionarcitadoc';
 
 const Gestionarcita = () => {
-  const {logout,user} = useAuth();
-  const citas = [
-    { paciente: 'John Doe', fecha: '2023-06-24', motivo: 'Consulta general' },
-    { paciente: 'Jane Smith', fecha: '2023-06-25', motivo: 'Examen de rutina' },
-    // Agrega más citas aquí
-  ];
+  const {logout} = useAuth();
+  const { citas, getCitas } = useGestionarcitadoc();
+
+  useEffect(() => {
+    getCitas();
+  }, []);
 
   return (
     <body>
@@ -54,14 +55,15 @@ const Gestionarcita = () => {
           </tr>
         </thead>
         <tbody>
-          {citas.map((cita, index) => (
-            <tr key={index}>
-              <td>{cita.paciente}</td>
-              <td>{cita.fecha}</td>
-              <td>{cita.motivo}</td>
-            </tr>
-          ))}
-        </tbody>
+              {citas &&
+                citas.map((cita) => (
+                  <tr key={cita.id}>
+                    <td>{cita.paciente.usuario}</td>
+                    <td>{cita.date}</td>
+                    <td>{cita.motivo}</td>
+                  </tr>
+                ))}
+            </tbody>
       </table>
     </main>
         </div>

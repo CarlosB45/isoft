@@ -1,24 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState ,useEffect} from 'react';
+import { Link , useNavigate} from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { AiOutlineHome, AiOutlineDelete, AiOutlineEdit} from 'react-icons/ai';
 import '../../../css/homestyle.css';
 import { useAuth } from '../../../context/AuthContext';
+import { useGestionarcitadoc } from '../../../context/Gestionarcitadoc';
 
 const Modificar = () => {
-  const {logout,user} = useAuth();
-  const [citas, setCitas] = useState([
-    { paciente: 'John Doe', fecha: '2023-06-24', motivo: 'Consulta general' },
-    { paciente: 'Jane Smith', fecha: '2023-06-25', motivo: 'Examen de rutina' },
-    // Agrega más citas aquí
-  ]);
+  const {logout} = useAuth();
+  const { citas, getCitas } = useGestionarcitadoc();
 
-  const handleModificarCita = (index, campo, valor) => {
-    const citasActualizadas = [...citas];
-    citasActualizadas[index] = {
-      ...citasActualizadas[index],
-      [campo]: valor
-    };
-    setCitas(citasActualizadas);
+  useEffect(() => {
+    getCitas();
+  }, []);
+
+  const { setValue } = useForm();
+  const [selectedCitaIndex, setSelectedCitaIndex] = useState(null);
+  const [selectedCita, setSelectedCita] = useState(null);
+  const navigate = useNavigate();
+
+  const [nombreDoctor, setDoctor] = useState('');
+  const [date, setDate] = useState('');
+  const [motivo, setMotivo] = useState('');
+
+  useEffect(() => {
+    getCitas();
+  }, []);
+
+
+  const handleActualizarClick = (citaId, index) => {
+    const selected = citas.find((cita) => cita.id === citaId);
+    if (selected) {
+      setSelectedCita(selected);
+      setSelectedCitaIndex(index);
+      setValue('pacienteField', selected.paciente.usuario);
+      setValue('fechaField', selected.date);
+      setValue('motivoField', selected.motivo);
+    }
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+  
   };
 
   return (
@@ -55,48 +78,72 @@ const Modificar = () => {
       <main className="content2">
       <h2>Citas Médicas</h2>
       <table>
-        <thead>
-          <tr>
-            <th>Nombre del Paciente</th>
-            <th>Fecha</th>
-            <th>Motivo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {citas.map((cita, index) => (
-            <tr key={index}>
-              <td>
-                <select
-                  value={cita.paciente}
-                  onChange={e => handleModificarCita(index, 'paciente', e.target.value)}
-                >
-                  <option value="John Doe">John Doe</option>
-                  <option value="Jane Smith">Jane Smith</option>
-                  {/* Agrega más opciones de pacientes aquí */}
-                </select>
-              </td>
-              <td>
-                <input
-                  type="date"
-                  value={cita.fecha}
-                  onChange={e => handleModificarCita(index, 'fecha', e.target.value)}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={cita.motivo}
-                  onChange={e => handleModificarCita(index, 'motivo', e.target.value)}
-                />
-              </td>
-              <td>
-                <button onClick={() => console.log('Guardar cambios')}>Guardar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              <thead>
+                <tr>
+                  <th>Nombre del paciente</th>
+                  <th>Fecha</th>
+                  <th>Motivo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              {citas &&
+  citas.map((cita, index) => (
+    <tr key={cita.id}>
+      <td>{cita.paciente.usuario}</td>
+      <td>{cita.date}</td>
+      <td>{cita.motivo}</td>
+      <td>
+        <button onClick={() => handleActualizarClick(cita.id, index)}>Actualizar</button>
+      </td>
+    </tr>
+  ))}
+              </tbody>
+            </table>
+      <div className="form-container8">
+      <form onSubmit={handleFormSubmit}>
+  <div className="input-container">
+    <label htmlFor="pacienteField">Nombre del paciente:</label>
+    <input
+  type="text"
+  id="pacienteField"
+  placeholder="Buscar doctor..."
+  value={
+    selectedCitaIndex !== null ? citas[selectedCitaIndex].paciente.usuario : ''
+  }
+  readOnly
+/>
+  </div>
+  <div className="input-container">
+    <label htmlFor="fechaField">Fecha:</label>
+    <input
+      type="date"
+      id="fechaField"
+      value={
+        date ||
+        (selectedCitaIndex !== null
+          ? new Date(citas[selectedCitaIndex].date).toISOString().split('T')[0]
+          : '')
+      }
+      onChange={(event) => setDate(event.target.value)}
+    />
+  </div>
+  <div className="input-container">
+    <label htmlFor="motivoField">Motivo:</label>
+    <input
+      type="text"
+      id="motivoField"
+      placeholder="Ingrese el motivo de la cita"
+      value={
+        motivo ||
+        (selectedCitaIndex !== null ? citas[selectedCitaIndex].motivo : '')
+      }
+      onChange={(event) => setMotivo(event.target.value)}
+    />
+  </div>
+  <button type="submit">Guardar Cita</button>
+</form>
+      </div>
     </main>
         </div>
       </div>
