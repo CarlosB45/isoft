@@ -1,7 +1,0 @@
-*se hizo el front para el login y el register y se diseño el estilo para estos dos front.
-*se agregraron se instalaron nuevas librerias que ayudaron a diseñar el register en cuanto a los formato y mensaje que
-se debe mostrar en caso que no se llenen los campos de forma correcta.
-*se enruto con BrowserRouter cada front que se va a usar (consultar el archivo App.js si quiere saber como ver los demas enlace del otro front).
-*se ejecuta el programa automaticamente le mostrara el login 
-
-nota: se esta trabajando ahora en los home para cada usuario, estan creadas los archivos pero aun se encuentra en edicion
