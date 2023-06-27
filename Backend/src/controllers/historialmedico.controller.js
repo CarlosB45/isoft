@@ -65,7 +65,7 @@ const storage = multer.diskStorage({
   };
 
   export const createHistorialMedico = async (req, res) => {
-    const { edadPaciente, generoPaciente, nombrePaciente, tipoSangrePaciente, regimenPaciente } = req.body; 
+    const { edadPaciente, generoPaciente, nombrePaciente, tipoSangrePaciente, regimenPaciente,archivo} = req.body; 
    /* try {
       upload.single('archivo')(req, res, async (err) => {
         if (err) {
@@ -86,6 +86,7 @@ const storage = multer.diskStorage({
           Paciente: Paciente.id,
           tipoSangrePaciente,
           regimenPaciente,
+          archivo,
           doctor: req.usuario.id,
         });
 

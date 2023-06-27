@@ -24,6 +24,7 @@ const Home = () => {
             <Link to="/Homedoctor/Consultar">Consultar historial clinico</Link>
             <Link to="/Homedoctor/Actualizarhistorial">Actualizar historial clinico</Link>
             <Link to="/Homedoctor/Crearhistorial">Crear historial clinico</Link>
+            <Link to="/Homedoctor/Gestionarplanilla">Gestionar planilla</Link>
           </div>
           <div className="content">
             <h1>Página de Inicio</h1>

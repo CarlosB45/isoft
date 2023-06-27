@@ -217,6 +217,11 @@
     align-items: center;
     margin-top: -100px;
   }
+
+  h2 {
+    margin-top: 0;
+    text-align: center;
+  }
   
   .form-container {
     display: flex;
@@ -349,7 +354,7 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-.form-container8 {
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: center;

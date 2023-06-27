@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { createRequest } from "../api/histortialclinico";
+import { createContext, useContext, useState} from "react";
+import { createRequest, gethistsRequest } from "../api/histortialclinico";
 
 const Historialmedic = createContext();
 
@@ -15,16 +15,34 @@ export const useHistorialmedic = () => {
 
 
 export function HistorialmedicProvider({ children }) {
-    const createhistorial = async (historial) => {
-        try {
-          
-        } catch (error) {
-          
-        }
-      };
+  const [historials, sethistorials] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+  const createhistorial = async (historial) => {
+    try {
+      const res = await createRequest(historial);
+      console.log(res);
+    } catch (error) {
+      setErrors(["No se pudo crear la cita"]);
+      console.log(error);
+    }
+    };
+
+    const getshistorial = async (historial) => {
+      try {
+        const res = await gethistsRequest();
+        sethistorials(res.data);
+      } catch (error) {
+        setErrors([error.message]);
+      }
+    };
+
   return (
     <Historialmedic.Provider
       value={{
+        createhistorial,
+        getshistorial,
+        historials
 
       }}
     >

@@ -20,7 +20,7 @@ import Modificarcita from './Pages/doctor/gestionarcitas/modificar'
 import Consultar from './Pages/doctor/consultarhistorial'
 import Actualizarhistorial from './Pages/doctor/actualizarhistorial'
 import Crearhistorial from './Pages/doctor/crearhistorial'
-
+import Gestionarplanilla from './Pages/doctor/gestionarplanilla'
 
 /*Rutas para el paciente*/ 
 import Homepaciente from './Pages/paciente/home'
@@ -41,6 +41,7 @@ function App() {
         <GestionarProvider>
         <GestionarCitaProvider>
           <GestionarcitadocProvider>
+          <HistorialmedicProvider>
           <BrowserRouter>
     <Routes>
       <Route path='/' element ={<Homepage/>} />
@@ -58,6 +59,7 @@ function App() {
       <Route path='/Homedoctor/Consultar' element ={<Consultar/>} />
       <Route path='/Homedoctor/Actualizarhistorial' element ={<Actualizarhistorial/>} />
       <Route path='/Homedoctor/Crearhistorial' element ={<Crearhistorial/>} />
+      <Route path='/Homedoctor/Gestionarplanilla' element ={<Gestionarplanilla/>} />
       <Route path='/Homepaciente' element ={<Homepaciente/>} />
       <Route path='/Homepaciente/Gestionarcita' element ={<Gestionarcita/>} />
       <Route path='/Homepaciente/Gestionarcita/Crear' element ={<Crear/>} />
@@ -67,6 +69,7 @@ function App() {
       </Route>
     </Routes>
     </BrowserRouter>
+          </HistorialmedicProvider>
           </GestionarcitadocProvider>
         </GestionarCitaProvider>
         </GestionarProvider>
