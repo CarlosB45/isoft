@@ -17,11 +17,11 @@ const Modificar = () => {
   const [nombreDoctor, setDoctor] = useState('');
   const [date, setDate] = useState('');
   const [motivo, setMotivo] = useState('');
+  const [showTable, setShowTable] = useState(true);
 
   useEffect(() => {
     getCitas();
   }, []);
-
 
   const handleActualizarClick = (citaId, index) => {
     const selected = citas.find((cita) => cita.id === citaId);
@@ -31,8 +31,8 @@ const Modificar = () => {
       setValue('doctorField', selected.doctor.usuario);
       setValue('fechaField', selected.date);
       setValue('motivoField', selected.motivo);
+      setShowTable(false);
     }
-    console.log(selected);
   };
 
   const handleFormSubmit = async (event) => {
@@ -44,15 +44,15 @@ const Modificar = () => {
       date,
       motivo,
     };
-  
+
     try {
       await updatecita(selectedCita.id, updatedCita);
       console.log("Cita actualizada con éxito");
     } catch (error) {
       console.error("Error al actualizar la cita:", error);
     }
-  
   };
+
   return (
     <body>
       <div className="homepage-container">
@@ -94,74 +94,81 @@ const Modificar = () => {
             </ul>
           </aside>
           <main className="content2">
-            <h2>Citas Médicas</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nombre del doctor</th>
-                  <th>Fecha</th>
-                  <th>Motivo</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-              {citas &&
-  citas.map((cita, index) => (
-    <tr key={cita.id}>
-      <td>{cita.doctor.usuario}</td>
-      <td>{cita.date}</td>
-      <td>{cita.motivo}</td>
-      <td>
-        <button onClick={() => handleActualizarClick(cita.id, index)}>Actualizar</button>
-      </td>
-    </tr>
-  ))}
-              </tbody>
-            </table>
-            <form onSubmit={handleFormSubmit}>
-  <div className="input-container">
-    <label htmlFor="doctorField">Nombre del doctor:</label>
-    <input
-      type="text"
-      id="doctorField"
-      placeholder="Buscar doctor..."
-      value={
-        nombreDoctor ||
-        (selectedCitaIndex !== null ? citas[selectedCitaIndex].doctor.usuario : '')
-      }
-      onChange={(event) => setDoctor(event.target.value)}
-    />
-  </div>
-  <div className="input-container">
-    <label htmlFor="fechaField">Fecha:</label>
-    <input
-      type="date"
-      id="fechaField"
-      value={
-        date ||
-        (selectedCitaIndex !== null
-          ? new Date(citas[selectedCitaIndex].date).toISOString().split('T')[0]
-          : '')
-      }
-      onChange={(event) => setDate(event.target.value)}
-    />
-  </div>
-  <div className="input-container">
-    <label htmlFor="motivoField">Motivo:</label>
-    <input
-      type="text"
-      id="motivoField"
-      placeholder="Ingrese el motivo de la cita"
-      value={
-        motivo ||
-        (selectedCitaIndex !== null ? citas[selectedCitaIndex].motivo : '')
-      }
-      onChange={(event) => setMotivo(event.target.value)}
-    />
-  </div>
-  <button type="submit">Guardar Cita</button>
-</form>
-
+            {showTable ? (
+              <>
+                <h2>Citas Médicas</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nombre del doctor</th>
+                      <th>Fecha</th>
+                      <th>Motivo</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {citas &&
+                      citas.map((cita, index) => (
+                        <tr key={cita.id}>
+                          <td>{cita.doctor.usuario}</td>
+                          <td>{cita.date}</td>
+                          <td>{cita.motivo}</td>
+                          <td>
+                            <button onClick={() => handleActualizarClick(cita.id, index)}>Actualizar</button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </>
+            ) : (
+              <>
+                <h2>Modificar Cita</h2>
+                <form onSubmit={handleFormSubmit}>
+                  <div className="input-container">
+                    <label htmlFor="doctorField">Nombre del doctor:</label>
+                    <input
+                      type="text"
+                      id="doctorField"
+                      placeholder="Buscar doctor..."
+                      value={
+                        nombreDoctor ||
+                        (selectedCitaIndex !== null ? citas[selectedCitaIndex].doctor.usuario : '')
+                      }
+                      onChange={(event) => setDoctor(event.target.value)}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <label htmlFor="fechaField">Fecha:</label>
+                    <input
+                      type="date"
+                      id="fechaField"
+                      value={
+                        date ||
+                        (selectedCitaIndex !== null
+                          ? new Date(citas[selectedCitaIndex].date).toISOString().split('T')[0]
+                          : '')
+                      }
+                      onChange={(event) => setDate(event.target.value)}
+                    />
+                  </div>
+                  <div className="input-container">
+                    <label htmlFor="motivoField">Motivo:</label>
+                    <input
+                      type="text"
+                      id="motivoField"
+                      placeholder="Ingrese el motivo de la cita"
+                      value={
+                        motivo ||
+                        (selectedCitaIndex !== null ? citas[selectedCitaIndex].motivo : '')
+                      }
+                      onChange={(event) => setMotivo(event.target.value)}
+                    />
+                  </div>
+                  <button type="submit">Guardar Cita</button>
+                </form>
+              </>
+            )}
           </main>
         </div>
       </div>
@@ -170,3 +177,4 @@ const Modificar = () => {
 };
 
 export default Modificar;
+
