@@ -1,5 +1,5 @@
 import { createContext, useContext, useState} from "react";
-import { createRequest, gethistsRequest } from "../api/histortialclinico";
+import { createRequest, gethistsRequest, gethistspacRequest } from "../api/histortialclinico";
 
 const Historialmedic = createContext();
 
@@ -37,11 +37,21 @@ export function HistorialmedicProvider({ children }) {
       }
     };
 
+    const getspachistorial = async (historial) => {
+      try {
+        const res = await gethistspacRequest();
+        sethistorials(res.data);
+      } catch (error) {
+        setErrors([error.message]);
+      }
+    };
+
   return (
     <Historialmedic.Provider
       value={{
         createhistorial,
         getshistorial,
+        getspachistorial,
         historials
 
       }}

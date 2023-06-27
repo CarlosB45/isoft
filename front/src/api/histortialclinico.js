@@ -4,4 +4,6 @@ export const createRequest = (historial) => axios.post('/doctor/historialmedico'
 
 export const gethistsRequest = () => axios.get(`/doctor/historialmedico`);
 
+export const gethistspacRequest = () => axios.get(`/paciente/historialmedico`);
+
 export const updatecitaRequest =() => axios.put(`/doctor/historialmedico`);
